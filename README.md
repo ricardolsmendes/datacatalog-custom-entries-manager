@@ -1,3 +1,3 @@
-# datacatalog-custom-types-manager
+# datacatalog-custom-entries-manager
 
-Python package to manage Google Cloud Data Catalog custom types.
+Python package to manage Google Cloud Data Catalog custom entries.

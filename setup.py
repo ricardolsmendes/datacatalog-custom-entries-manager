@@ -1,24 +1,24 @@
 import setuptools
 
 setuptools.setup(
-    name='datacatalog-custom-types-manager',
+    name='datacatalog-custom-entries-manager',
     version='0.0.1',
-    url='https://github.com/ricardolsmendes/datacatalog-custom-types-manager',
+    url='https://github.com/ricardolsmendes/datacatalog-custom-entries-manager',
     author='Ricardo Mendes',
     author_email='ricardolsmendes@gmail.com',
     license='MIT',
-    description='A package to manage Google Cloud Data Catalog custom types',
+    description='A package to manage Google Cloud Data Catalog custom entries',
     platforms='Posix; MacOS X; Windows',
     packages=setuptools.find_packages(where='./src'),
     package_dir={'': 'src'},
     entry_points={
         'console_scripts': [
-            'datacatalog-custom-types = datacatalog_custom_types_manager:main',
+            'datacatalog-custom-entries = datacatalog_custom_entries_manager:main',
         ],
     },
     include_package_data=True,
     install_requires=(
-        'google-cloud-datacatalog',
+        'google-datacatalog-connectors-commons',
     ),
     setup_requires=('pytest-runner', ),
     tests_require=('pytest-cov', ),
