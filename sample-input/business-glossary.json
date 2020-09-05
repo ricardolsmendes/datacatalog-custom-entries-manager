@@ -1,0 +1,60 @@
+{
+  "userSpecifiedSystem": "GlossaryManager",
+  "entryGroups": [
+    {
+      "id": "glossary",
+      "name": "Glossary",
+      "entries": [
+        {
+          "userSpecifiedType": "business_glossary",
+          "name": "GDPR Sample Business Glossary",
+          "linkedResource": "",
+          "createdAt": "2020-09-04T16:19:43-03:00",
+          "updatedAt": "2020-09-04T16:25:26-03:00"
+        },
+        {
+          "userSpecifiedType": "glossary_term",
+          "name": "Personally Identifiable Information - PII",
+          "linkedResource": "",
+          "createdAt": "2020-09-04T16:22:43-03:00",
+          "updatedAt": "2020-09-04T16:28:26-03:00"
+        },
+        {
+          "userSpecifiedType": "glossary_term",
+          "name": "Personal Information",
+          "linkedResource": "",
+          "createdAt": "2020-09-04T16:25:14-03:00",
+          "updatedAt": "2020-09-04T16:31:16-03:00"
+        },
+        {
+          "userSpecifiedType": "glossary_term",
+          "name": "Education",
+          "linkedResource": "",
+          "createdAt": "2020-09-04T16:27:48-03:00",
+          "updatedAt": "2020-09-04T16:31:36-03:00"
+        },
+        {
+          "userSpecifiedType": "glossary_term",
+          "name": "Gender",
+          "linkedResource": "",
+          "createdAt": "2020-09-04T16:27:48-03:00",
+          "updatedAt": "2020-09-04T16:31:36-03:00"
+        },
+        {
+          "userSpecifiedType": "glossary_term",
+          "name": "Name",
+          "linkedResource": "",
+          "createdAt": "2020-09-04T16:27:48-03:00",
+          "updatedAt": "2020-09-04T16:31:36-03:00"
+        },
+        {
+          "userSpecifiedType": "glossary_term",
+          "name": "Religion",
+          "linkedResource": "",
+          "createdAt": "2020-09-04T16:27:48-03:00",
+          "updatedAt": "2020-09-04T16:31:36-03:00"
+        }
+      ]
+    }
+  ]
+}
