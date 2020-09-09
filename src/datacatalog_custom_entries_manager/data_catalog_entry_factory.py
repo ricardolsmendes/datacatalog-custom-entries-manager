@@ -15,13 +15,13 @@ class DataCatalogEntryFactory(prepare.BaseEntryFactory):
     def make_entry_from_dict(self, group_id, data, user_specified_system):
         entry = types.Entry()
 
-        generated_id = self.__format_id(data.get('name'))
+        generated_id = self.__format_id(data.get('displayName'))
         entry.name = datacatalog.DataCatalogClient.entry_path(
             self.__project_id, self.__location_id, group_id, generated_id)
 
         entry.user_specified_system = user_specified_system
         entry.user_specified_type = data.get('userSpecifiedType')
-        entry.display_name = self._format_display_name(data.get('name'))
+        entry.display_name = self._format_display_name(data.get('displayName'))
         entry.linked_resource = data.get('linkedResource')
         entry.source_system_timestamps.create_time.seconds = \
             self.__convert_datetime_str_to_seconds(data.get('createdAt'))
