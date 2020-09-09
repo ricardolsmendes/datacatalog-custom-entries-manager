@@ -8,49 +8,49 @@
         {
           "userSpecifiedType": "business_glossary",
           "displayName": "GDPR Sample Business Glossary",
-          "linkedResource": "",
+          "linkedResource": "//glossary-manager/glossaries/gdpr-sample",
           "createdAt": "2020-09-04T16:19:43-03:00",
           "updatedAt": "2020-09-04T16:25:26-03:00"
         },
         {
           "userSpecifiedType": "glossary_term",
           "displayName": "Personally Identifiable Information - PII",
-          "linkedResource": "",
+          "linkedResource": "//glossary-manager/glossaries/gdpr-sample/terms/pii",
           "createdAt": "2020-09-04T16:22:43-03:00",
           "updatedAt": "2020-09-04T16:28:26-03:00"
         },
         {
           "userSpecifiedType": "glossary_term",
           "displayName": "Personal Information",
-          "linkedResource": "",
+          "linkedResource": "//glossary-manager/glossaries/gdpr-sample/terms/personal-info",
           "createdAt": "2020-09-04T16:25:14-03:00",
           "updatedAt": "2020-09-04T16:31:16-03:00"
         },
         {
           "userSpecifiedType": "glossary_term",
           "displayName": "Education",
-          "linkedResource": "",
+          "linkedResource": "//glossary-manager/glossaries/gdpr-sample/terms/education",
           "createdAt": "2020-09-04T16:27:48-03:00",
           "updatedAt": "2020-09-04T16:31:36-03:00"
         },
         {
           "userSpecifiedType": "glossary_term",
           "displayName": "Gender",
-          "linkedResource": "",
+          "linkedResource": "//glossary-manager/glossaries/gdpr-sample/terms/gender",
           "createdAt": "2020-09-04T16:27:48-03:00",
           "updatedAt": "2020-09-04T16:31:36-03:00"
         },
         {
           "userSpecifiedType": "glossary_term",
           "displayName": "Name",
-          "linkedResource": "",
+          "linkedResource": "//glossary-manager/glossaries/gdpr-sample/terms/name",
           "createdAt": "2020-09-04T16:27:48-03:00",
           "updatedAt": "2020-09-04T16:31:36-03:00"
         },
         {
           "userSpecifiedType": "glossary_term",
           "displayName": "Religion",
-          "linkedResource": "",
+          "linkedResource": "//glossary-manager/glossaries/gdpr-sample/terms/religion",
           "createdAt": "2020-09-04T16:27:48-03:00",
           "updatedAt": "2020-09-04T16:31:36-03:00"
         }
