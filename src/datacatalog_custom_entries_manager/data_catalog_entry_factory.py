@@ -19,10 +19,13 @@ class DataCatalogEntryFactory(prepare.BaseEntryFactory):
         entry.name = datacatalog.DataCatalogClient.entry_path(
             self.__project_id, self.__location_id, group_id, generated_id)
 
-        entry.user_specified_system = user_specified_system
-        entry.user_specified_type = data.get('userSpecifiedType')
-        entry.display_name = self._format_display_name(data.get('displayName'))
         entry.linked_resource = data.get('linkedResource')
+        entry.display_name = self._format_display_name(data.get('displayName'))
+        entry.description = data.get('description', '')
+
+        entry.user_specified_type = data.get('userSpecifiedType')
+        entry.user_specified_system = user_specified_system
+
         entry.source_system_timestamps.create_time.seconds = \
             self.__convert_datetime_str_to_seconds(data.get('createdAt'))
         entry.source_system_timestamps.update_time.seconds = \
