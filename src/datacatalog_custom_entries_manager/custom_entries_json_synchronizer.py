@@ -1,6 +1,8 @@
 import json
 import logging
+from typing import List
 
+from google.cloud.datacatalog import types
 from google.datacatalog_connectors.commons import cleanup, ingest, prepare
 
 from . import data_catalog_entry_factory
@@ -14,9 +16,9 @@ class CustomEntriesJSONSynchronizer:
         self.__data_catalog_entry_factory = data_catalog_entry_factory.DataCatalogEntryFactory(
             project_id, location_id)
 
-    def sync_to_file(self, file_path):
+    def sync_to_file(self, file_path: str) -> List[types.Entry]:
         """
-        Synchronize Custom Entries to a JSON file contents.
+        Synchronize Custom Entries to the JSON file contents.
 
         :param file_path: The JSON file path.
         :return: A list with the up to date Custom Entries.

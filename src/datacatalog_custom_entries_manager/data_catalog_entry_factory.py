@@ -1,7 +1,8 @@
 from datetime import datetime
-from google.cloud.datacatalog import types
+from typing import Dict, Tuple
 
 from google.cloud import datacatalog
+from google.cloud.datacatalog import types
 from google.datacatalog_connectors.commons import prepare
 
 
@@ -12,7 +13,9 @@ class DataCatalogEntryFactory(prepare.BaseEntryFactory):
         self.__project_id = project_id
         self.__location_id = location_id
 
-    def make_entry_from_dict(self, group_id, data, user_specified_system):
+    def make_entry_from_dict(self, group_id, data: Dict[str, str], user_specified_system) \
+            -> Tuple[str, types.Entry]:
+
         entry = types.Entry()
 
         generated_id = self.__format_id(data.get('displayName'))

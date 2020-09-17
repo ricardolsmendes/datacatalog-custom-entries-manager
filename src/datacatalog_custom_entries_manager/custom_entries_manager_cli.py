@@ -2,7 +2,7 @@ import argparse
 import logging
 import sys
 
-from . import custom_entries_json_synchronizer
+from . import custom_entries_synchronizer
 
 
 class CustomEntriesManagerCLI:
@@ -26,9 +26,10 @@ class CustomEntriesManagerCLI:
         subparsers = parser.add_subparsers()
 
         sync_entries_parser = subparsers.add_parser('sync', help='Synchronize Custom Entries')
+        sync_entries_parser.add_argument('--csv-file',
+                                         help='CSV file with metadata for the Custom Entries')
         sync_entries_parser.add_argument('--json-file',
-                                         help='JSON file with metadata for the Custom Entries',
-                                         required=True)
+                                         help='JSON file with metadata for the Custom Entries')
         sync_entries_parser.add_argument('--project-id',
                                          help='Google Cloud Project ID',
                                          required=True)
@@ -41,8 +42,8 @@ class CustomEntriesManagerCLI:
 
     @classmethod
     def __synchronize_custom_entries(cls, args):
-        custom_entries_json_synchronizer.CustomEntriesJSONSynchronizer(
-            args.project_id, args.location_id).sync_to_file(file_path=args.json_file)
+        custom_entries_synchronizer.CustomEntriesSynchronizer(args.project_id, args.location_id)\
+            .sync_to_file(csv_file_path=args.csv_file, json_file_path=args.json_file)
 
 
 def main():
