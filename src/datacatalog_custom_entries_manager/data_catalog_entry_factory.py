@@ -13,7 +13,8 @@ class DataCatalogEntryFactory(prepare.BaseEntryFactory):
         self.__project_id = project_id
         self.__location_id = location_id
 
-    def make_entry_from_dict(self, group_id, data: Dict[str, str], user_specified_system) \
+    def make_entry_from_dict(
+            self, group_id: str, data: Dict[str, str], user_specified_system: str) \
             -> Tuple[str, types.Entry]:
 
         entry = types.Entry()
