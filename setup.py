@@ -19,6 +19,7 @@ setuptools.setup(
     include_package_data=True,
     install_requires=(
         'google-datacatalog-connectors-commons',
+        'pandas',
     ),
     setup_requires=('pytest-runner', ),
     tests_require=('pytest-cov', ),
