@@ -31,7 +31,7 @@ class CustomEntriesCSVReader:
         normalized_df.set_index(
             constant.ENTRIES_DS_USER_SPECIFIED_SYSTEM_COLUMN_LABEL, inplace=True)
 
-        entry_groups = []
+        assembled_entry_groups = []
         for system in normalized_df.index.unique().tolist():
             entry_groups_subset = \
                 normalized_df.loc[[system], constant.ENTRIES_DS_GROUP_ID_COLUMN_LABEL:]
@@ -39,9 +39,10 @@ class CustomEntriesCSVReader:
             # Save memory by deleting data already copied to a subset.
             normalized_df.drop(system, inplace=True)
 
-            entry_groups.append((system, cls.__make_entry_groups(entry_groups_subset, system)))
+            assembled_entry_groups.append(
+                (system, cls.__make_entry_groups(entry_groups_subset, system)))
 
-        return entry_groups
+        return assembled_entry_groups
 
     @classmethod
     def __normalize_dataframe(cls, dataframe):
