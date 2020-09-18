@@ -60,7 +60,6 @@ class CustomEntriesSynchronizer:
         logging.info('Converting raw metadata into Data Catalog entries...')
 
         entries = entry_group.get('entries')
-        #print(entries)
         assembled_entries = self.__make_assembled_entries(group_id, entries)
         logging.info('==== DONE ====')
 
