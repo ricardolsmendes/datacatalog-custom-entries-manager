@@ -1,11 +1,10 @@
 import logging
-from typing import Callable, Dict, List
+from typing import Callable, Dict, List, Tuple
 
 from google.cloud.datacatalog import types
 from google.datacatalog_connectors.commons import cleanup, ingest, prepare
 
-from . import custom_entries_csv_reader, custom_entries_json_reader, \
-    data_catalog_entry_factory
+from . import custom_entries_csv_reader, custom_entries_json_reader, data_catalog_entry_factory
 
 
 class CustomEntriesSynchronizer:
@@ -33,23 +32,30 @@ class CustomEntriesSynchronizer:
         logging.info('')
         logging.info('==== Synchronize Custom Entries to file [STARTED] =====')
 
-        read_file: Callable[[str], List[Dict[str, object]]] = \
+        read_file: Callable[[str], List[Tuple[str, List[Dict[str, object]]]]] = \
             custom_entries_csv_reader.CustomEntriesCSVReader.read_file if csv_file_path \
             else custom_entries_json_reader.CustomEntriesJSONReader.read_file
 
-        entry_groups = read_file(file_path)
+        assembled_entry_groups = read_file(file_path)
 
         logging.info('')
         logging.info('>> Synchronizing file :: Data Catalog metadata...')
 
-        entries = [self.__synchronize_entry_group(entry_group) for entry_group in entry_groups]
+        entries = []
+        for system_name, entry_groups in assembled_entry_groups:
+            entries.extend([
+                self.__synchronize_entry_group(entry_group, system_name)
+                for entry_group in entry_groups
+            ])
 
         logging.info('')
         logging.info('==== Synchronize Custom Entries to file [FINISHED] ====')
 
         return entries
 
-    def __synchronize_entry_group(self, entry_group: Dict[str, object]) -> List[types.Entry]:
+    def __synchronize_entry_group(self, entry_group: Dict[str, object], system_name: str) \
+            -> List[types.Entry]:
+
         group_id = entry_group.get('id')
 
         logging.info('')
@@ -67,12 +73,9 @@ class CustomEntriesSynchronizer:
         logging.info('')
         logging.info('Deleting obsolete metadata from Data Catalog...')
 
-        # TODO Read from actual metadata.
-        user_specified_system = 'GlossaryManager'
-
         cleaner = cleanup.DataCatalogMetadataCleaner(
             self.__project_id, self.__location_id, group_id)
-        cleaner.delete_obsolete_metadata(assembled_entries, f'system={user_specified_system}')
+        cleaner.delete_obsolete_metadata(assembled_entries, f'system={system_name}')
         logging.info('==== DONE ====')
 
         # Ingest metadata into Data Catalog.

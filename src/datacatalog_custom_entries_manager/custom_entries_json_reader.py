@@ -1,6 +1,6 @@
 import json
 import logging
-from typing import Dict, List
+from typing import Dict, List, Tuple
 
 from . import constant
 
@@ -8,7 +8,7 @@ from . import constant
 class CustomEntriesJSONReader:
 
     @classmethod
-    def read_file(cls, file_path: str) -> List[Dict[str, object]]:
+    def read_file(cls, file_path: str) -> List[Tuple[str, List[Dict[str, object]]]]:
         """
         Read Custom Entries from a JSON file.
 
@@ -21,26 +21,24 @@ class CustomEntriesJSONReader:
         with open(file_path) as json_file:
             json_data = json.load(json_file)
 
-        return cls.__make_entry_groups_from_system_indexed_data(json_data)
+        return cls.__assemble_entry_groups_from_system_indexed_data(json_data)
 
     @classmethod
-    def __make_entry_groups_from_system_indexed_data(cls, json_object: Dict[str, object]) \
-            -> List[Dict[str, object]]:
+    def __assemble_entry_groups_from_system_indexed_data(cls, json_object: Dict[str, object]) \
+            -> List[Tuple[str, List[Dict[str, object]]]]:
 
         systems_json = json_object.get(constant.ENTRIES_JSON_USER_SPECIFIED_SYSTEMS_FIELD_NAME)
-
-        entry_groups = []
-        for system_json in systems_json:
-            entry_groups.extend(cls.__make_entry_groups_from_system(system_json))
-        return entry_groups
+        return [cls.__make_entry_groups_from_system(system_json) for system_json in systems_json]
 
     @classmethod
     def __make_entry_groups_from_system(cls, json_object: Dict[str, object]) \
-            -> List[Dict[str, object]]:
+            -> Tuple[str, List[Dict[str, object]]]:
 
         system_name = json_object.get(constant.ENTRIES_JSON_USER_SPECIFIED_SYSTEM_FIELD_NAME)
         groups_json = json_object.get(constant.ENTRIES_JSON_ENTRY_GROUPS_FIELD_NAME)
-        return [cls.__make_entry_group(group_json, system_name) for group_json in groups_json]
+        return \
+            system_name, \
+            [cls.__make_entry_group(group_json, system_name) for group_json in groups_json]
 
     @classmethod
     def __make_entry_group(cls, json_object: Dict[str, object], system_name: str) \

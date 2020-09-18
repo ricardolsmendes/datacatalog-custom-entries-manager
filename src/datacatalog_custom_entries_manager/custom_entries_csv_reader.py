@@ -1,5 +1,5 @@
 import logging
-from typing import Dict, List
+from typing import Dict, List, Tuple
 
 import pandas as pd
 
@@ -9,7 +9,7 @@ from . import constant
 class CustomEntriesCSVReader:
 
     @classmethod
-    def read_file(cls, file_path: str) -> List[Dict[str, object]]:
+    def read_file(cls, file_path: str) -> List[Tuple[str, List[Dict[str, object]]]]:
         """
         Read Custom Entries from a JSON file.
 
@@ -21,11 +21,11 @@ class CustomEntriesCSVReader:
 
         dataframe = pd.read_csv(file_path)
 
-        return cls.__make_entry_groups_from_system_indexable_dataframe(dataframe)
+        return cls.__assemble_entry_groups_from_system_indexable_dataframe(dataframe)
 
     @classmethod
-    def __make_entry_groups_from_system_indexable_dataframe(cls, dataframe) \
-            -> List[Dict[str, object]]:
+    def __assemble_entry_groups_from_system_indexable_dataframe(cls, dataframe) \
+            -> List[Tuple[str, List[Dict[str, object]]]]:
 
         normalized_df = cls.__normalize_dataframe(dataframe)
         normalized_df.set_index(
@@ -39,7 +39,7 @@ class CustomEntriesCSVReader:
             # Save memory by deleting data already copied to a subset.
             normalized_df.drop(system, inplace=True)
 
-            entry_groups.extend(cls.__make_entry_groups(entry_groups_subset, system))
+            entry_groups.append((system, cls.__make_entry_groups(entry_groups_subset, system)))
 
         return entry_groups
 
