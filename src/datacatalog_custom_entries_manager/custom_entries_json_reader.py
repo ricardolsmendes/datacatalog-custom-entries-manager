@@ -28,10 +28,10 @@ class CustomEntriesJSONReader:
             -> List[Tuple[str, List[Dict[str, object]]]]:
 
         systems_json = json_object.get(constant.ENTRIES_JSON_USER_SPECIFIED_SYSTEMS_FIELD_NAME)
-        return [cls.__make_entry_groups_from_system(system_json) for system_json in systems_json]
+        return [cls.__assemble_entry_groups_by_system(system_json) for system_json in systems_json]
 
     @classmethod
-    def __make_entry_groups_from_system(cls, json_object: Dict[str, object]) \
+    def __assemble_entry_groups_by_system(cls, json_object: Dict[str, object]) \
             -> Tuple[str, List[Dict[str, object]]]:
 
         system_name = json_object.get(constant.ENTRIES_JSON_USER_SPECIFIED_SYSTEM_FIELD_NAME)
@@ -48,14 +48,8 @@ class CustomEntriesJSONReader:
         return {
             'id': json_object.get(constant.ENTRIES_JSON_ENTRY_GROUP_ID_FIELD_NAME),
             'name': json_object.get(constant.ENTRIES_JSON_ENTRY_GROUP_NAME_FIELD_NAME),
-            'entries': cls.__make_entries(entries_json, system_name)
+            'entries': [cls.__make_entry(entry_json, system_name) for entry_json in entries_json]
         }
-
-    @classmethod
-    def __make_entries(cls, json_array: List[Dict[str, str]], system_name: str) \
-            -> List[Dict[str, str]]:
-
-        return [cls.__make_entry(json_object, system_name) for json_object in json_array]
 
     @classmethod
     def __make_entry(cls, json_object: Dict[str, str], system_name: str) -> Dict[str, str]:

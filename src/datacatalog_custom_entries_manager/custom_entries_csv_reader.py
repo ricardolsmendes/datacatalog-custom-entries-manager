@@ -65,8 +65,6 @@ class CustomEntriesCSVReader:
         entry_groups = []
         for group_id in dataframe.index.unique().tolist():
             record = dataframe.to_dict(orient='records')[0]
-            group_name = record.get(constant.ENTRIES_DS_GROUP_NAME_COLUMN_LABEL)
-
             entries_subset = \
                 dataframe.loc[[group_id], constant.ENTRIES_DS_DISPLAY_NAME_COLUMN_LABEL:]
 
@@ -75,7 +73,7 @@ class CustomEntriesCSVReader:
 
             entry_groups.append({
                 'id': group_id,
-                'name': group_name,
+                'name': record.get(constant.ENTRIES_DS_GROUP_NAME_COLUMN_LABEL),
                 'entries': cls.__make_entries(entries_subset, system_name)
             })
 
