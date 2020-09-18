@@ -1,7 +1,8 @@
 from datetime import datetime
-from google.cloud.datacatalog import types
+from typing import Dict, Tuple
 
 from google.cloud import datacatalog
+from google.cloud.datacatalog import types
 from google.datacatalog_connectors.commons import prepare
 
 
@@ -12,24 +13,24 @@ class DataCatalogEntryFactory(prepare.BaseEntryFactory):
         self.__project_id = project_id
         self.__location_id = location_id
 
-    def make_entry_from_dict(self, group_id, data, user_specified_system):
+    def make_entry_from_dict(self, group_id: str, data: Dict[str, str]) -> Tuple[str, types.Entry]:
         entry = types.Entry()
 
-        generated_id = self.__format_id(data.get('displayName'))
+        generated_id = self.__format_id(data.get('display_name'))
         entry.name = datacatalog.DataCatalogClient.entry_path(
             self.__project_id, self.__location_id, group_id, generated_id)
 
-        entry.linked_resource = data.get('linkedResource')
-        entry.display_name = self._format_display_name(data.get('displayName'))
+        entry.linked_resource = data.get('linked_resource')
+        entry.display_name = self._format_display_name(data.get('display_name'))
         entry.description = data.get('description', '')
 
-        entry.user_specified_type = data.get('userSpecifiedType')
-        entry.user_specified_system = user_specified_system
+        entry.user_specified_type = data.get('user_specified_type')
+        entry.user_specified_system = data.get('user_specified_system')
 
         entry.source_system_timestamps.create_time.seconds = \
-            self.__convert_datetime_str_to_seconds(data.get('createdAt'))
+            self.__convert_datetime_str_to_seconds(data.get('created_at'))
         entry.source_system_timestamps.update_time.seconds = \
-            self.__convert_datetime_str_to_seconds(data.get('updatedAt'))
+            self.__convert_datetime_str_to_seconds(data.get('updated_at'))
 
         return generated_id, entry
 
