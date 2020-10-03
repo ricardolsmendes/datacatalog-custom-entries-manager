@@ -18,7 +18,7 @@
             {
               "linkedResource": "//glossary-manager/glossaries/gdpr-sample/categories/personal-info",
               "displayName": "Personal Information",
-              "description": "Personal information means information identifiable to any person, including, but not limited to, information that relates to a person’s name, health, finances, education, business, use or receipt of governmental services or other activities, addresses, telephone numbers, social security numbers, driver license numbers, other identifying numbers, and any financial identifiers.",
+              "description": "Personal information means information identifiable to any person, including, but not limited to, information that relates to a person's name, health, finances, education, business, use or receipt of governmental services or other activities, addresses, telephone numbers, social security numbers, driver license numbers, other identifying numbers, and any financial identifiers.",
               "type": "glossary_category",
               "createdAt": "2020-09-04T16:22:43-0300",
               "updatedAt": "2020-09-04T16:28:26-0300"
