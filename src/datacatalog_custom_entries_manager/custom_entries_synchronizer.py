@@ -73,17 +73,21 @@ class CustomEntriesSynchronizer:
         logging.info('')
         logging.info('Deleting obsolete metadata from Data Catalog...')
 
-        cleaner = cleanup.DataCatalogMetadataCleaner(
-            self.__project_id, self.__location_id, group_id)
+        cleaner = \
+            cleanup.DataCatalogMetadataCleaner(self.__project_id, self.__location_id, group_id)
         cleaner.delete_obsolete_metadata(assembled_entries, f'system={system_name}')
         logging.info('==== DONE ====')
 
-        # Ingest metadata into Data Catalog.
         logging.info('')
+        if not assembled_entries:
+            logging.info('No metadata to ingest...')
+            return []
+
+        # Ingest metadata into Data Catalog.
         logging.info('Ingesting metadata into Data Catalog...')
 
-        ingestor = ingest.DataCatalogMetadataIngestor(
-            self.__project_id, self.__location_id, group_id)
+        ingestor = \
+            ingest.DataCatalogMetadataIngestor(self.__project_id, self.__location_id, group_id)
         ingestor.ingest_metadata(assembled_entries)
         logging.info('==== DONE ====')
 
