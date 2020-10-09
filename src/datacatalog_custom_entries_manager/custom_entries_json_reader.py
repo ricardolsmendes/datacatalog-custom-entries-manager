@@ -54,12 +54,18 @@ class CustomEntriesJSONReader:
     @classmethod
     def __make_entry(cls, json_object: Dict[str, str], system_name: str) -> Dict[str, str]:
         return {
-            'linked_resource': json_object.get(constant.ENTRIES_JSON_LINKED_RESOURCE_FIELD_NAME),
-            'display_name': json_object.get(constant.ENTRIES_JSON_DISPLAY_NAME_FIELD_NAME),
-            'description': json_object.get(constant.ENTRIES_JSON_DESCRIPTION_FIELD_NAME, ''),
-            'user_specified_type': json_object.get(
-                constant.ENTRIES_JSON_USER_SPECIFIED_TYPE_FIELD_NAME),
-            'user_specified_system': system_name,
-            'created_at': json_object.get(constant.ENTRIES_JSON_CREATED_AT_FIELD_NAME),
-            'updated_at': json_object.get(constant.ENTRIES_JSON_UPDATED_AT_FIELD_NAME),
+            'linked_resource':
+            json_object.get(constant.ENTRIES_JSON_LINKED_RESOURCE_FIELD_NAME),
+            'display_name':
+            json_object.get(constant.ENTRIES_JSON_DISPLAY_NAME_FIELD_NAME),
+            'description':
+            json_object.get(constant.ENTRIES_JSON_DESCRIPTION_FIELD_NAME, ''),
+            'user_specified_type':
+            json_object.get(constant.ENTRIES_JSON_USER_SPECIFIED_TYPE_FIELD_NAME),
+            'user_specified_system':
+            system_name,
+            'created_at':
+            json_object.get(constant.ENTRIES_JSON_CREATED_AT_FIELD_NAME),
+            'updated_at':
+            json_object.get(constant.ENTRIES_JSON_UPDATED_AT_FIELD_NAME),
         }

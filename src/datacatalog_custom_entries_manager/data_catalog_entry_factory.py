@@ -17,8 +17,9 @@ class DataCatalogEntryFactory(prepare.BaseEntryFactory):
         entry = types.Entry()
 
         generated_id = self.__format_id(data.get('display_name'))
-        entry.name = datacatalog.DataCatalogClient.entry_path(
-            self.__project_id, self.__location_id, group_id, generated_id)
+        entry.name = datacatalog.DataCatalogClient.entry_path(self.__project_id,
+                                                              self.__location_id, group_id,
+                                                              generated_id)
 
         entry.linked_resource = data.get('linked_resource')
         entry.display_name = self._format_display_name(data.get('display_name'))

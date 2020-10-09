@@ -28,8 +28,8 @@ class CustomEntriesCSVReader:
             -> List[Tuple[str, List[Dict[str, object]]]]:
 
         normalized_df = cls.__normalize_dataframe(dataframe)
-        normalized_df.set_index(
-            constant.ENTRIES_DS_USER_SPECIFIED_SYSTEM_COLUMN_LABEL, inplace=True)
+        normalized_df.set_index(constant.ENTRIES_DS_USER_SPECIFIED_SYSTEM_COLUMN_LABEL,
+                                inplace=True)
 
         assembled_entry_groups = []
         for system in normalized_df.index.unique().tolist():
@@ -91,7 +91,7 @@ class CustomEntriesCSVReader:
             'display_name': record.get(constant.ENTRIES_DS_DISPLAY_NAME_COLUMN_LABEL),
             'description': record.get(constant.ENTRIES_DS_DESCRIPTION_COLUMN_LABEL, ''),
             'user_specified_type':
-                record.get(constant.ENTRIES_DS_USER_SPECIFIED_TYPE_COLUMN_LABEL),
+            record.get(constant.ENTRIES_DS_USER_SPECIFIED_TYPE_COLUMN_LABEL),
             'user_specified_system': system_name,
             'created_at': record.get(constant.ENTRIES_DS_CREATED_AT_COLUMN_LABEL),
             'updated_at': record.get(constant.ENTRIES_DS_UPDATED_AT_COLUMN_LABEL),
