@@ -13,7 +13,7 @@ class CustomEntriesJSONReader:
         Read Custom Entries from a JSON file.
 
         :param file_path: The JSON file path.
-        :return: A list with the Custom Entries assembled by their parent Groups.
+        :return: A list with Entry Groups assembled by their parent User Specified Systems.
         """
         logging.info('')
         logging.info('>> Reading the JSON file: %s...', file_path)
@@ -47,7 +47,6 @@ class CustomEntriesJSONReader:
         entries_json = json_object.get(constant.ENTRIES_JSON_ENTRIES_FIELD_NAME)
         return {
             'id': json_object.get(constant.ENTRIES_JSON_ENTRY_GROUP_ID_FIELD_NAME),
-            'name': json_object.get(constant.ENTRIES_JSON_ENTRY_GROUP_NAME_FIELD_NAME),
             'entries': [cls.__make_entry(entry_json, system_name) for entry_json in entries_json]
         }
 
