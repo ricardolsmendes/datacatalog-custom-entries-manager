@@ -14,7 +14,7 @@ class CustomEntriesCSVReader:
         Read Custom Entries from a JSON file.
 
         :param file_path: The JSON file path.
-        :return: A list with the Custom Entries assembled by their parent Groups.
+        :return: A list with Entry Groups assembled by their parent User Specified Systems.
         """
         logging.info('')
         logging.info('>> Reading the CSV file: %s...', file_path)
@@ -64,7 +64,6 @@ class CustomEntriesCSVReader:
 
         entry_groups = []
         for group_id in dataframe.index.unique().tolist():
-            record = dataframe.to_dict(orient='records')[0]
             entries_subset = \
                 dataframe.loc[[group_id], constant.ENTRIES_DS_DISPLAY_NAME_COLUMN_LABEL:]
 
@@ -73,7 +72,6 @@ class CustomEntriesCSVReader:
 
             entry_groups.append({
                 'id': group_id,
-                'name': record.get(constant.ENTRIES_DS_GROUP_NAME_COLUMN_LABEL),
                 'entries': cls.__make_entries(entries_subset, system_name)
             })
 
