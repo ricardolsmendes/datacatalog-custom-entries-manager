@@ -23,21 +23,28 @@ class DataCatalogEntryFactory(prepare.BaseEntryFactory):
 
         entry.linked_resource = data.get('linked_resource')
         entry.display_name = self._format_display_name(data.get('display_name'))
-        entry.description = data.get('description', '')
+
+        description = data.get('description', '')
+        if description:
+            entry.description = description
 
         entry.user_specified_type = data.get('user_specified_type')
         entry.user_specified_system = data.get('user_specified_system')
 
-        entry.source_system_timestamps.create_time.seconds = \
-            self.__convert_datetime_str_to_seconds(data.get('created_at'))
-        entry.source_system_timestamps.update_time.seconds = \
-            self.__convert_datetime_str_to_seconds(data.get('updated_at'))
+        created_at = data.get('created_at', '')
+        if created_at:
+            entry.source_system_timestamps.create_time.seconds = \
+                self.__convert_datetime_str_to_seconds(created_at)
+        updated_at = data.get('updated_at', '')
+        if updated_at:
+            entry.source_system_timestamps.update_time.seconds = \
+                self.__convert_datetime_str_to_seconds(updated_at)
 
         return generated_id, entry
 
     @classmethod
-    def __format_id(cls, unformatted_id):
-        lower_case_id = unformatted_id.lower()
+    def __format_id(cls, not_formatted_id):
+        lower_case_id = not_formatted_id.lower()
         return cls._format_id(lower_case_id)
 
     @classmethod

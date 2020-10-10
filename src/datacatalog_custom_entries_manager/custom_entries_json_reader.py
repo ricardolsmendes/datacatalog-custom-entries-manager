@@ -52,7 +52,7 @@ class CustomEntriesJSONReader:
         }
 
     @classmethod
-    def __make_entry(cls, json_object: Dict[str, str], system_name: str) -> Dict[str, str]:
+    def __make_entry(cls, json_object: Dict[str, object], system_name: str) -> Dict[str, object]:
         return {
             'linked_resource':
             json_object.get(constant.ENTRIES_JSON_LINKED_RESOURCE_FIELD_NAME),

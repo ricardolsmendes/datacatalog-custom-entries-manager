@@ -80,19 +80,31 @@ class CustomEntriesCSVReader:
         return entry_groups
 
     @classmethod
-    def __make_entries(cls, dataframe, system_name: str) -> List[Dict[str, str]]:
+    def __make_entries(cls, dataframe, system_name: str) -> List[Dict[str, object]]:
         records = dataframe.to_dict(orient='records')
         return [cls.__make_entry(record, system_name) for record in records]
 
     @classmethod
-    def __make_entry(cls, record: Dict[str, str], system_name: str) -> Dict[str, str]:
-        return {
-            'linked_resource': record.get(constant.ENTRIES_DS_LINKED_RESOURCE_COLUMN_LABEL),
-            'display_name': record.get(constant.ENTRIES_DS_DISPLAY_NAME_COLUMN_LABEL),
-            'description': record.get(constant.ENTRIES_DS_DESCRIPTION_COLUMN_LABEL, ''),
-            'user_specified_type':
-            record.get(constant.ENTRIES_DS_USER_SPECIFIED_TYPE_COLUMN_LABEL),
+    def __make_entry(cls, record: Dict[str, object], system_name: str) -> Dict[str, object]:
+        entry = {
+            'linked_resource': record[constant.ENTRIES_DS_LINKED_RESOURCE_COLUMN_LABEL],
+            'display_name': record[constant.ENTRIES_DS_DISPLAY_NAME_COLUMN_LABEL],
+            'user_specified_type': record[constant.ENTRIES_DS_USER_SPECIFIED_TYPE_COLUMN_LABEL],
             'user_specified_system': system_name,
-            'created_at': record.get(constant.ENTRIES_DS_CREATED_AT_COLUMN_LABEL),
-            'updated_at': record.get(constant.ENTRIES_DS_UPDATED_AT_COLUMN_LABEL),
         }
+
+        cls.__set_optional_string_field(entry, 'description',
+                                        record[constant.ENTRIES_DS_DESCRIPTION_COLUMN_LABEL])
+        cls.__set_optional_string_field(entry, 'created_at',
+                                        record[constant.ENTRIES_DS_CREATED_AT_COLUMN_LABEL])
+        cls.__set_optional_string_field(entry, 'updated_at',
+                                        record[constant.ENTRIES_DS_UPDATED_AT_COLUMN_LABEL])
+
+        return entry
+
+    @classmethod
+    def __set_optional_string_field(cls, entry: Dict[str, object], field_id: str, value: object):
+        # Pandas is not aware of the field types and reads empty values as NaN (float),
+        # hence the type check.
+        if isinstance(value, str) and value:
+            entry[field_id] = value
