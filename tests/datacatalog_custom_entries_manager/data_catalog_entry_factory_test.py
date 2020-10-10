@@ -81,7 +81,7 @@ class DataCatalogEntryFactoryTest(unittest.TestCase):
             'display_name': 'Test display name',
             'user_specified_type': 'Test specified type',
             'user_specified_system': 'Test specified system',
-            'created_at': '2020-10-10T17:25:00Z',
+            'created_at': '2020-10-10-17:25:00-03:00',
         }
 
         self.assertRaises(ValueError, self.__data_catalog_entry_factory.make_entry_from_dict,
