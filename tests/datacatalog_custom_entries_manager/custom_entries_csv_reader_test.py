@@ -8,6 +8,7 @@ from datacatalog_custom_entries_manager import custom_entries_csv_reader
 
 @mock.patch('datacatalog_custom_entries_manager.custom_entries_csv_reader.pd.read_csv')
 class CustomEntriesCSVReaderTest(unittest.TestCase):
+    __EMPTY_VALUE = float('NaN')
 
     def test_read_file_multiple_user_specified_systems_should_succeed(self, mock_read_csv):
         mock_read_csv.return_value = pd.DataFrame(
@@ -37,12 +38,30 @@ class CustomEntriesCSVReaderTest(unittest.TestCase):
         self.assertEqual('TestSystem1', entry_1['user_specified_system'])
         self.assertEqual('TestSystem2', entry_2['user_specified_system'])
 
-    def test_read_file_should_not_set_optional_string_field_when_empty(self, mock_read_csv):
+    def test_read_file_missing_auto_fill_values_should_succeed(self, mock_read_csv):
+        mock_read_csv.return_value = pd.DataFrame(
+            data={
+                'user_specified_system': ['TestSystem', self.__EMPTY_VALUE],
+                'group_id': ['test-group', self.__EMPTY_VALUE],
+                'linked_resource': ['//test/linked-resource-1', '//test/linked-resource-2'],
+            })
+
+        assembled_entry_groups = \
+            custom_entries_csv_reader.CustomEntriesCSVReader.read_file('file-path')
+
+        self.assertEqual(1, len(assembled_entry_groups))
+
+        _, groups = assembled_entry_groups[0]
+
+        self.assertEqual(2, len(groups[0]['entries']))
+
+    def test_read_file_should_not_set_optional_string_field_when_not_filled(self, mock_read_csv):
         mock_read_csv.return_value = pd.DataFrame(
             data={
                 'user_specified_system': ['TestSystem'],
                 'group_id': ['test-group'],
                 'linked_resource': ['//test/linked-resource'],
+                'description': [self.__EMPTY_VALUE],
             })
 
         assembled_entry_groups = \
@@ -53,7 +72,7 @@ class CustomEntriesCSVReaderTest(unittest.TestCase):
 
         self.assertFalse('description' in entry)
 
-    def test_read_file_should_set_optional_string_field_when_provided(self, mock_read_csv):
+    def test_read_file_should_set_optional_string_field_when_filled(self, mock_read_csv):
         mock_read_csv.return_value = pd.DataFrame(
             data={
                 'user_specified_system': ['TestSystem'],
