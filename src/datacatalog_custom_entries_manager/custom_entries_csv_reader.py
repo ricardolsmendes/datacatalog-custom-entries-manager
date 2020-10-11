@@ -14,7 +14,8 @@ class CustomEntriesCSVReader:
         Read Custom Entries from a JSON file.
 
         :param file_path: The JSON file path.
-        :return: A list with Entry Groups assembled by their parent User Specified Systems.
+        :return: A list with Entry Group ``dicts`` assembled
+            by their parent User Specified Systems.
         """
         logging.info('')
         logging.info('>> Reading the CSV file: %s...', file_path)
@@ -84,6 +85,7 @@ class CustomEntriesCSVReader:
 
     @classmethod
     def __make_entry(cls, record: Dict[str, object], system_name: str) -> Dict[str, object]:
+        # Mandatory fields
         entry = {
             'linked_resource': record[constant.ENTRIES_DS_LINKED_RESOURCE_COLUMN_LABEL],
             'display_name': record[constant.ENTRIES_DS_DISPLAY_NAME_COLUMN_LABEL],
@@ -91,6 +93,7 @@ class CustomEntriesCSVReader:
             'user_specified_system': system_name,
         }
 
+        # Optional fields
         cls.__set_optional_string_field(entry, 'description',
                                         record[constant.ENTRIES_DS_DESCRIPTION_COLUMN_LABEL])
         cls.__set_optional_string_field(entry, 'created_at',
