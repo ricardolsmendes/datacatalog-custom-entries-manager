@@ -8,7 +8,9 @@ from datacatalog_custom_entries_manager import custom_entries_csv_reader
 
 @mock.patch('datacatalog_custom_entries_manager.custom_entries_csv_reader.pd.read_csv')
 class CustomEntriesCSVReaderTest(unittest.TestCase):
-    __EMPTY_VALUE = float('NaN')
+    # Pandas is not aware of the field types and reads empty values as NaN;
+    # thus, NaN is used in the mocked dataframes to set up more realistic testing scenarios.
+    __NAN = float('NaN')
 
     def test_read_file_multiple_user_specified_systems_should_succeed(self, mock_read_csv):
         mock_read_csv.return_value = pd.DataFrame(
@@ -41,8 +43,8 @@ class CustomEntriesCSVReaderTest(unittest.TestCase):
     def test_read_file_missing_auto_fill_values_should_succeed(self, mock_read_csv):
         mock_read_csv.return_value = pd.DataFrame(
             data={
-                'user_specified_system': ['TestSystem', self.__EMPTY_VALUE],
-                'group_id': ['test-group', self.__EMPTY_VALUE],
+                'user_specified_system': ['TestSystem', self.__NAN],
+                'group_id': ['test-group', self.__NAN],
                 'linked_resource': ['//test/linked-resource-1', '//test/linked-resource-2'],
             })
 
@@ -61,7 +63,7 @@ class CustomEntriesCSVReaderTest(unittest.TestCase):
                 'user_specified_system': ['TestSystem'],
                 'group_id': ['test-group'],
                 'linked_resource': ['//test/linked-resource'],
-                'description': [self.__EMPTY_VALUE],
+                'description': [self.__NAN],
             })
 
         assembled_entry_groups = \
