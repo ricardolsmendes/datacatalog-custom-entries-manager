@@ -22,7 +22,7 @@ external sources. Currently supports the CSV and JSON file formats.
     + [1.3.2. Download a JSON key and save it as](#132-download-a-json-key-and-save-it-as)
     + [1.3.3. Set the environment variables](#133-set-the-environment-variables)
 - [2. Manage Custom Entries](#2-manage-custom-entries)
-  * [2.1. Synchronize Entry Groups](#21-synchronize-entry-groups)
+  * [2.1. Synchronize](#21-synchronize)
     + [2.1.1. To a CSV file](#211-to-a-csv-file)
     + [2.1.2. To a JSON file](#212-to-a-json-file)
 
@@ -97,25 +97,25 @@ export GOOGLE_APPLICATION_CREDENTIALS=./credentials/datacatalog-custom-entries-m
 
 ## 2. Manage Custom Entries
 
-### 2.1. Synchronize Entry Groups
+### 2.1. Synchronize
 
 #### 2.1.1. To a CSV file
 
 - _SCHEMA_
 
-The metadata schema to synchronize Entry Groups is presented below. Use as many lines as needed to
-describe all the custom systems, groups and entries you need.
+The metadata schema to synchronize Custom Entries is presented below. Use as many lines as needed
+to describe all Data Catalog Entries you need.
 
 | Column                    | Description                                                                                                                                                                | Mandatory |
 | ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------: |
-| **user_specified_system** | Indicates the Entries source system                                                                                                                                        |    yes    |
+| **user_specified_system** | Indicates the Entry source system                                                                                                                                          |    yes    |
 | **group_id**              | Id of the Entry Group the Entry belongs to                                                                                                                                 |    yes    |
 | **linked_resource**       | The resource a metadata Entry refers to                                                                                                                                    |    yes    |
 | **display_name**          | Display information such as title and description; a short name to identify the Entry (the `entry_id` field will be generated as a normalized version of the display name) |    yes    |
-| **description**           | Can consist of several sentences that describe an Entry's contents                                                                                                         |    no     |
+| **description**           | Can consist of several sentences that describe the Entry contents                                                                                                          |    no     |
 | **user_specified_type**   | A custom value indicating the Entry type                                                                                                                                   |    yes    |
-| **created_at**            | The creation time of the underlying resource, not of the Data Catalog entry (format: YYYY-MM-DDTHH:MM:SSZ)                                                                 |    no     |
-| **updated_at**            | The last-modified time of the underlying resource, not of the Data Catalog entry (format: YYYY-MM-DDTHH:MM:SSZ)                                                            |    no     |
+| **created_at**            | The creation time of the underlying resource, not of the Data Catalog Entry (format: YYYY-MM-DDTHH:MM:SSZ)                                                                 |    no     |
+| **updated_at**            | The last-modified time of the underlying resource, not of the Data Catalog Entry (format: YYYY-MM-DDTHH:MM:SSZ)                                                            |    no     |
 
 - _SAMPLE INPUT_
 
@@ -147,8 +147,8 @@ docker run --rm --tty \
 
 - _STRUCTURE_
 
-The metadata structure to synchronize Entry Groups is presented below. Use as many lines as needed
-to describe all the custom systems, groups and entries you need.
+The metadata structure to synchronize Custom Entries is presented below. Use as many objects as
+needed to describe all Data Catalog Entries you need.
 
 ```json
 {
