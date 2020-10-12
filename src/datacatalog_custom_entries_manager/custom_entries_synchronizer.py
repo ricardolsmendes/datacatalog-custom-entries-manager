@@ -4,7 +4,7 @@ from typing import Callable, Dict, List, Tuple
 from google.cloud.datacatalog import types
 from google.datacatalog_connectors.commons import cleanup, ingest, prepare
 
-from . import custom_entries_csv_reader, custom_entries_json_reader, data_catalog_entry_factory
+from . import custom_entries_csv_reader, custom_entries_json_reader, datacatalog_entry_factory
 
 
 class CustomEntriesSynchronizer:
@@ -12,10 +12,12 @@ class CustomEntriesSynchronizer:
     def __init__(self, project_id, location_id):
         self.__project_id = project_id
         self.__location_id = location_id
-        self.__data_catalog_entry_factory = data_catalog_entry_factory.DataCatalogEntryFactory(
+        self.__entry_factory = datacatalog_entry_factory.DataCatalogEntryFactory(
             project_id, location_id)
 
-    def sync_to_file(self, csv_file_path: str, json_file_path: str) -> List[types.Entry]:
+    def sync_to_file(self,
+                     csv_file_path: str = None,
+                     json_file_path: str = None) -> List[types.Entry]:
         """
         Synchronize Custom Entries to the provided file contents.
 
@@ -26,15 +28,13 @@ class CustomEntriesSynchronizer:
         """
         file_path = csv_file_path if csv_file_path else json_file_path if json_file_path else None
 
-        if not file_path:
-            raise Exception('Either a CSV or a JSON file must be provided.')
-
         logging.info('')
         logging.info('==== Synchronize Custom Entries to file [STARTED] =====')
 
         read_file: Callable[[str], List[Tuple[str, List[Dict[str, object]]]]] = \
             custom_entries_csv_reader.CustomEntriesCSVReader.read_file if csv_file_path \
-            else custom_entries_json_reader.CustomEntriesJSONReader.read_file
+            else custom_entries_json_reader.CustomEntriesJSONReader.read_file if json_file_path \
+            else Exception('Either a CSV or a JSON file must be provided.')
 
         assembled_entry_groups = read_file(file_path)
 
@@ -57,6 +57,8 @@ class CustomEntriesSynchronizer:
             -> List[types.Entry]:
 
         group_id = entry_group.get('id')
+        if not group_id:
+            return []
 
         logging.info('')
         logging.info('Processing Entry Group: %s...', group_id)
@@ -66,7 +68,7 @@ class CustomEntriesSynchronizer:
         logging.info('Converting raw metadata into Data Catalog entries...')
 
         entries = entry_group.get('entries')
-        assembled_entries = self.__make_assembled_entries(group_id, entries)
+        assembled_entries = self.__make_assembled_entries(group_id, entries) if entries else []
         logging.info('==== DONE ====')
 
         # Data Catalog cleanup: delete obsolete data.
@@ -97,5 +99,5 @@ class CustomEntriesSynchronizer:
         return [self.__make_assembled_entry(group_id, entry) for entry in data]
 
     def __make_assembled_entry(self, group_id, data):
-        entry_id, entry = self.__data_catalog_entry_factory.make_entry_from_dict(group_id, data)
+        entry_id, entry = self.__entry_factory.make_entry_from_dict(group_id, data)
         return prepare.AssembledEntryData(entry_id, entry)

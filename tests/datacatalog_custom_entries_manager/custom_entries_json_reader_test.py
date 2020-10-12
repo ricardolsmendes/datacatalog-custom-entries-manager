@@ -15,7 +15,7 @@ class CustomEntriesJSONReaderTest(unittest.TestCase):
               \"userSpecifiedSystems\": [{
                 \"name\": \"TestSystem1\",
                 \"entryGroups\": [{
-                  \"id\": \"test-group-1\",
+                  \"id\": \"testgroup1\",
                   \"entries\": [{
                     \"linkedResource\": \"//test/linked-resource-1\",
                     \"displayName\": \"Display name 1\",
@@ -25,7 +25,7 @@ class CustomEntriesJSONReaderTest(unittest.TestCase):
               }, {
                 \"name\": \"TestSystem2\",
                 \"entryGroups\": [{
-                  \"id\": \"test-group-2\",
+                  \"id\": \"testgroup2\",
                   \"entries\": [{
                     \"linkedResource\": \"//test/linked-resource-2\",
                     \"displayName\": \"Display name 2\",
@@ -47,8 +47,8 @@ class CustomEntriesJSONReaderTest(unittest.TestCase):
         group_1 = groups_system_1[0]
         group_2 = groups_system_2[0]
 
-        self.assertEqual('test-group-1', group_1['id'])
-        self.assertEqual('test-group-2', group_2['id'])
+        self.assertEqual('testgroup1', group_1['id'])
+        self.assertEqual('testgroup2', group_2['id'])
 
         entry_1 = group_1['entries'][0]
         entry_2 = group_2['entries'][0]
@@ -68,7 +68,7 @@ class CustomEntriesJSONReaderTest(unittest.TestCase):
               \"userSpecifiedSystems\": [{
                 \"name\": \"TestSystem\",
                 \"entryGroups\": [{
-                  \"id\": \"test-group\",
+                  \"id\": \"testgroup\",
                   \"entries\": [{
                     \"linkedResource\": \"//test/linked-resource\",
                     \"displayName\": \"Display name\",
@@ -93,7 +93,7 @@ class CustomEntriesJSONReaderTest(unittest.TestCase):
               \"userSpecifiedSystems\": [{
                 \"name\": \"TestSystem\",
                 \"entryGroups\": [{
-                  \"id\": \"test-group\",
+                  \"id\": \"testgroup\",
                   \"entries\": [{
                     \"linkedResource\": \"//test/linked-resource\",
                     \"displayName\": \"Display name\",

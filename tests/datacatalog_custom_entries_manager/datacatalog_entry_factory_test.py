@@ -1,12 +1,12 @@
 import unittest
 
-from datacatalog_custom_entries_manager import data_catalog_entry_factory
+from datacatalog_custom_entries_manager import datacatalog_entry_factory
 
 
 class DataCatalogEntryFactoryTest(unittest.TestCase):
 
     def setUp(self):
-        self.__data_catalog_entry_factory = data_catalog_entry_factory.DataCatalogEntryFactory(
+        self.__data_catalog_entry_factory = datacatalog_entry_factory.DataCatalogEntryFactory(
             'test-project', 'test-location')
 
     def test_make_entry_from_dict_should_set_mandatory_fields(self):

@@ -16,7 +16,7 @@ class CustomEntriesCSVReaderTest(unittest.TestCase):
         mock_read_csv.return_value = pd.DataFrame(
             data={
                 'user_specified_system': ['TestSystem1', 'TestSystem2'],
-                'group_id': ['test-group-1', 'test-group-2'],
+                'group_id': ['testgroup1', 'testgroup2'],
                 'linked_resource': ['//test/linked-resource-1', '//test/linked-resource-2'],
             })
 
@@ -31,8 +31,8 @@ class CustomEntriesCSVReaderTest(unittest.TestCase):
         group_1 = groups_system_1[0]
         group_2 = groups_system_2[0]
 
-        self.assertEqual('test-group-1', group_1['id'])
-        self.assertEqual('test-group-2', group_2['id'])
+        self.assertEqual('testgroup1', group_1['id'])
+        self.assertEqual('testgroup2', group_2['id'])
 
         entry_1 = group_1['entries'][0]
         entry_2 = group_2['entries'][0]
@@ -44,7 +44,7 @@ class CustomEntriesCSVReaderTest(unittest.TestCase):
         mock_read_csv.return_value = pd.DataFrame(
             data={
                 'user_specified_system': ['TestSystem', math.nan],
-                'group_id': ['test-group', math.nan],
+                'group_id': ['testgroup', math.nan],
                 'linked_resource': ['//test/linked-resource-1', '//test/linked-resource-2'],
             })
 
@@ -60,7 +60,7 @@ class CustomEntriesCSVReaderTest(unittest.TestCase):
     def test_read_file_missing_key_column_should_fail_for_two_or_more_records(self, mock_read_csv):
         mock_read_csv.return_value = pd.DataFrame(
             data={
-                'group_id': ['test-group', math.nan],
+                'group_id': ['testgroup', math.nan],
                 'linked_resource': ['//test/linked-resource-1', '//test/linked-resource-2'],
             })
 
@@ -70,7 +70,7 @@ class CustomEntriesCSVReaderTest(unittest.TestCase):
     def test_read_file_missing_mandatory_column_should_set_nan_entry_field(self, mock_read_csv):
         mock_read_csv.return_value = pd.DataFrame(data={
             'user_specified_system': ['TestSystem'],
-            'group_id': ['test-group'],
+            'group_id': ['testgroup'],
         })
 
         assembled_entry_groups = \
@@ -85,7 +85,7 @@ class CustomEntriesCSVReaderTest(unittest.TestCase):
         mock_read_csv.return_value = pd.DataFrame(
             data={
                 'user_specified_system': ['TestSystem'],
-                'group_id': ['test-group'],
+                'group_id': ['testgroup'],
                 'linked_resource': ['//test/linked-resource'],
             })
 
@@ -101,7 +101,7 @@ class CustomEntriesCSVReaderTest(unittest.TestCase):
         mock_read_csv.return_value = pd.DataFrame(
             data={
                 'user_specified_system': ['TestSystem'],
-                'group_id': ['test-group'],
+                'group_id': ['testgroup'],
                 'linked_resource': ['//test/linked-resource'],
                 'description': [math.nan],
             })
@@ -118,7 +118,7 @@ class CustomEntriesCSVReaderTest(unittest.TestCase):
         mock_read_csv.return_value = pd.DataFrame(
             data={
                 'user_specified_system': ['TestSystem'],
-                'group_id': ['test-group'],
+                'group_id': ['testgroup'],
                 'linked_resource': ['//test/linked-resource'],
                 'description': ['Test description'],
             })
