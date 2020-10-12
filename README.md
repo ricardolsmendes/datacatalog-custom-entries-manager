@@ -22,7 +22,7 @@ external sources. Currently supports the CSV and JSON file formats.
     + [1.3.2. Download a JSON key and save it as](#132-download-a-json-key-and-save-it-as)
     + [1.3.3. Set the environment variables](#133-set-the-environment-variables)
 - [2. Manage Custom Entries](#2-manage-custom-entries)
-  * [2.1. Synchronize Data Catalog](#21-synchronize-data-catalog)
+  * [2.1. Synchronize Entry Groups](#21-synchronize-entry-groups)
     + [2.1.1. To a CSV file](#211-to-a-csv-file)
     + [2.1.2. To a JSON file](#212-to-a-json-file)
 
@@ -41,10 +41,10 @@ Using [virtualenv][3] is optional, but strongly recommended unless you use [Dock
 This is recommended so all related stuff will reside at the same place, making it easier to follow
 below instructions.
 
-````bash
+```bash
 mkdir ./datacatalog-custom-entries-manager
 cd ./datacatalog-custom-entries-manager
-````
+```
 
 _All paths starting with `./` in the next steps are relative to the
 `datacatalog-custom-entries-manager` folder._
@@ -81,9 +81,10 @@ cd ./datacatalog-custom-entries-manager
 
 - DataCatalog entryGroup Owner
 - DataCatalog entry Owner
-- Data Catalog Viewer 
+- Data Catalog Viewer
 
 #### 1.3.2. Download a JSON key and save it as
+
 - `./credentials/datacatalog-custom-entries-manager.json`
 
 #### 1.3.3. Set the environment variables
@@ -96,16 +97,32 @@ export GOOGLE_APPLICATION_CREDENTIALS=./credentials/datacatalog-custom-entries-m
 
 ## 2. Manage Custom Entries
 
-### 2.1. Synchronize Data Catalog
+### 2.1. Synchronize Entry Groups
 
 #### 2.1.1. To a CSV file
 
-- *SAMPLE INPUT* 
+- _SCHEMA_
+
+The metadata schema to synchronize Entry Groups is presented below. Use as many lines as needed to
+describe all the custom systems, groups and entries you need.
+
+| Column                    | Description                                                                                                                                                                | Mandatory |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------: |
+| **user_specified_system** | Indicates the Entries source system                                                                                                                                        |    yes    |
+| **group_id**              | Id of the Entry Group the Entry belongs to                                                                                                                                 |    yes    |
+| **linked_resource**       | The resource a metadata Entry refers to                                                                                                                                    |    yes    |
+| **display_name**          | Display information such as title and description; a short name to identify the Entry (the `entry_id` field will be generated as a normalized version of the display name) |    yes    |
+| **description**           | Can consist of several sentences that describe an Entry's contents                                                                                                         |    no     |
+| **user_specified_type**   | A custom value indicating the Entry type                                                                                                                                   |    yes    |
+| **created_at**            | The creation time of the underlying resource, not of the Data Catalog entry (format: YYYY-MM-DDTHH:MM:SSZ)                                                                 |    no     |
+| **updated_at**            | The last-modified time of the underlying resource, not of the Data Catalog entry (format: YYYY-MM-DDTHH:MM:SSZ)                                                            |    no     |
+
+- _SAMPLE INPUT_
 
 1. [sample-input/csv][4] for reference;
 1. [Data Catalog Sample Custom Entries][5] (Google Sheets) might help to create/export a CSV file.
 
-- *COMMANDS*
+- _COMMANDS_
 
 **Python + virtualenv**
 
@@ -128,11 +145,44 @@ docker run --rm --tty \
 
 #### 2.1.2. To a JSON file
 
-- *SAMPLE INPUT* 
+- _STRUCTURE_
+
+The metadata structure to synchronize Entry Groups is presented below. Use as many lines as needed
+to describe all the custom systems, groups and entries you need.
+
+```json
+{
+  "userSpecifiedSystems": [
+    {
+      "name": "STRING",
+      "entryGroups": [
+        {
+          "id": "STRING",
+          "entries": [
+            {
+              "linkedResource": "STRING",
+              "displayName": "STRING",
+              "description": "STRING (optional)",
+              "type": "STRING",
+              "createdAt": "STRING (optional, format: YYYY-MM-DDTHH:MM:SSZ)",
+              "updatedAt": "STRING (optional, format: YYYY-MM-DDTHH:MM:SSZ)"
+            },
+            ...
+          ]
+        },
+        ...
+      ]
+    },
+    ...
+  ]
+}
+```
+
+- _SAMPLE INPUT_
 
 1. [sample-input/json][6] for reference;
 
-- *COMMANDS*
+- _COMMANDS_
 
 **Python + virtualenv**
 
