@@ -107,5 +107,5 @@ class CustomEntriesCSVReader:
     def __set_optional_string_field(cls, entry: Dict[str, object], field_id: str, value: object):
         # Pandas is not aware of the field types and reads empty values as NaN (float),
         # hence the type check.
-        if isinstance(value, str) and value:
+        if value and isinstance(value, str):
             entry[field_id] = value
