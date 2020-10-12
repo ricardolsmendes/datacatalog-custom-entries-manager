@@ -3,7 +3,7 @@
 Python package to manage Google Cloud [Data Catalog custom entries][1], loading metadata from
 external sources. Currently supports the CSV and JSON file formats.
 
-![Continuous Integration][2]
+![Continuous Integration][2] ![Continuous Delivery][3]
 
 ## Table of Contents
 
@@ -32,7 +32,7 @@ external sources. Currently supports the CSV and JSON file formats.
 
 ### 1.1. Python + virtualenv
 
-Using [virtualenv][3] is optional, but strongly recommended unless you use [Docker](#12-docker).
+Using [virtualenv][4] is optional, but strongly recommended unless you use [Docker](#12-docker).
 
 #### 1.1.1. Install Python 3.6+
 
@@ -119,8 +119,8 @@ to describe all Data Catalog Entries you need.
 
 - _SAMPLE INPUT_
 
-1. [sample-input/csv][4] for reference;
-1. [Data Catalog Sample Custom Entries][5] (Google Sheets) might help to create/export a CSV file.
+1. [sample-input/csv][5] for reference;
+1. [Data Catalog Sample Custom Entries][6] (Google Sheets) might help to create/export a CSV file.
 
 - _COMMANDS_
 
@@ -166,21 +166,18 @@ needed to describe all Data Catalog Entries you need.
               "type": "STRING",
               "createdAt": "STRING (optional, format: YYYY-MM-DDTHH:MM:SSZ)",
               "updatedAt": "STRING (optional, format: YYYY-MM-DDTHH:MM:SSZ)"
-            },
-            ...
+            }
           ]
-        },
-        ...
+        }
       ]
-    },
-    ...
+    }
   ]
 }
 ```
 
 - _SAMPLE INPUT_
 
-1. [sample-input/json][6] for reference;
+1. [sample-input/json][7] for reference;
 
 - _COMMANDS_
 
@@ -205,7 +202,8 @@ docker run --rm --tty \
 
 [1]: https://cloud.google.com/data-catalog/docs/how-to/custom-entries
 [2]: https://github.com/ricardolsmendes/datacatalog-custom-entries-manager/workflows/Continuous%20Integration/badge.svg
-[3]: https://virtualenv.pypa.io/en/latest/
-[4]: https://github.com/ricardolsmendes/datacatalog-custom-entries-manager/tree/master/sample-input/csv
-[5]: https://docs.google.com/spreadsheets/d/1F_6M1BA9qlcGZf_ZyC3cUAePUjMXInZWbUOSGow5Gfc
-[6]: https://github.com/ricardolsmendes/datacatalog-custom-entries-manager/tree/master/sample-input/json
+[3]: https://github.com/ricardolsmendes/datacatalog-custom-entries-manager/workflows/Continuous%20Delivery/badge.svg
+[4]: https://virtualenv.pypa.io/en/latest/
+[5]: https://github.com/ricardolsmendes/datacatalog-custom-entries-manager/tree/master/sample-input/csv
+[6]: https://docs.google.com/spreadsheets/d/1F_6M1BA9qlcGZf_ZyC3cUAePUjMXInZWbUOSGow5Gfc
+[7]: https://github.com/ricardolsmendes/datacatalog-custom-entries-manager/tree/master/sample-input/json
