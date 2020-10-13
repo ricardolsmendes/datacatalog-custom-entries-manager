@@ -3,12 +3,12 @@
 Python package to manage Google Cloud [Data Catalog custom entries][1], loading metadata from
 external sources. Currently supports the CSV and JSON file formats.
 
-![Continuous Integration][2] ![Continuous Delivery][3]
-
-It's built on top of [GoogleCloudPlatform/datacatalog-connectors][4] and, differently from the
+It's built on top of [GoogleCloudPlatform/datacatalog-connectors][2] and, differently from the
 existing connectors, allows you to ingest metadata with no need to connect to other systems than
 Data Catalog. Known use cases include validating Custom Entries ingestion workloads before coding
 their specific features and loading metadata into development / PoC environments as well.
+
+![Continuous Integration][3] ![Continuous Delivery][4]
 
 ## Table of Contents
 
@@ -206,9 +206,9 @@ docker run --rm --tty \
 ```
 
 [1]: https://cloud.google.com/data-catalog/docs/how-to/custom-entries
-[2]: https://github.com/ricardolsmendes/datacatalog-custom-entries-manager/workflows/Continuous%20Integration/badge.svg
-[3]: https://github.com/ricardolsmendes/datacatalog-custom-entries-manager/workflows/Continuous%20Delivery/badge.svg
-[4]: https://github.com/GoogleCloudPlatform/datacatalog-connectors
+[2]: https://github.com/GoogleCloudPlatform/datacatalog-connectors
+[3]: https://github.com/ricardolsmendes/datacatalog-custom-entries-manager/workflows/Continuous%20Integration/badge.svg
+[4]: https://github.com/ricardolsmendes/datacatalog-custom-entries-manager/workflows/Continuous%20Delivery/badge.svg
 [5]: https://virtualenv.pypa.io/en/latest/
 [6]: https://github.com/ricardolsmendes/datacatalog-custom-entries-manager/tree/master/sample-input/csv
 [7]: https://docs.google.com/spreadsheets/d/1F_6M1BA9qlcGZf_ZyC3cUAePUjMXInZWbUOSGow5Gfc
