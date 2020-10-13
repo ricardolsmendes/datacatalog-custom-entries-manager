@@ -18,7 +18,7 @@ setuptools.setup(
     },
     include_package_data=True,
     install_requires=(
-        'google-datacatalog-connectors-commons',
+        'google-datacatalog-connectors-commons==0.5.1',
         'pandas',
     ),
     setup_requires=('pytest-runner', ),
