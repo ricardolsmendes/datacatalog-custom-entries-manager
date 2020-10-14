@@ -4,11 +4,14 @@ Python package to manage Google Cloud [Data Catalog custom entries][1], loading 
 external sources. Currently supports the CSV and JSON file formats.
 
 It's built on top of [GoogleCloudPlatform/datacatalog-connectors][2] and, differently from the
-existing connectors, allows you to ingest metadata with no need to connect to other systems than
-Data Catalog. Known use cases include validating Custom Entries ingestion workloads before coding
-their specific features and loading metadata into development / PoC environments as well.
+existing connectors, allows ingesting metadata with no need to connect to other systems than Data
+Catalog. Known use cases include validating Custom Entries ingestion workloads before coding their
+specific features and loading metadata into development / PoC environments.
 
-![Continuous Integration][3] ![Continuous Delivery][4]
+In case you need not only Entries but also Tags to validate your model/workload, consider giving
+[datacatalog-custom-model-manager][3] a try.
+
+![Continuous Integration][4] ![Continuous Delivery][5]
 
 ## Table of Contents
 
@@ -37,7 +40,7 @@ their specific features and loading metadata into development / PoC environments
 
 ### 1.1. Python + virtualenv
 
-Using [virtualenv][5] is optional, but strongly recommended unless you use [Docker](#12-docker).
+Using [virtualenv][6] is optional, but strongly recommended unless you use [Docker](#12-docker).
 
 #### 1.1.1. Install Python 3.6+
 
@@ -124,8 +127,8 @@ to describe all Data Catalog Entries you need.
 
 - _SAMPLE INPUT_
 
-1. [sample-input/csv][6] for reference;
-1. [Data Catalog Sample Custom Entries][7] (Google Sheets) might help to create/export a CSV file.
+1. [sample-input/csv][7] for reference;
+1. [Data Catalog Sample Custom Entries][8] (Google Sheets) might help to create/export a CSV file.
 
 - _COMMANDS_
 
@@ -182,7 +185,7 @@ needed to describe all Data Catalog Entries you need.
 
 - _SAMPLE INPUT_
 
-1. [sample-input/json][8] for reference;
+1. [sample-input/json][9] for reference;
 
 - _COMMANDS_
 
@@ -207,9 +210,10 @@ docker run --rm --tty \
 
 [1]: https://cloud.google.com/data-catalog/docs/how-to/custom-entries
 [2]: https://github.com/GoogleCloudPlatform/datacatalog-connectors
-[3]: https://github.com/ricardolsmendes/datacatalog-custom-entries-manager/workflows/Continuous%20Integration/badge.svg
-[4]: https://github.com/ricardolsmendes/datacatalog-custom-entries-manager/workflows/Continuous%20Delivery/badge.svg
-[5]: https://virtualenv.pypa.io/en/latest/
-[6]: https://github.com/ricardolsmendes/datacatalog-custom-entries-manager/tree/master/sample-input/csv
-[7]: https://docs.google.com/spreadsheets/d/1F_6M1BA9qlcGZf_ZyC3cUAePUjMXInZWbUOSGow5Gfc
-[8]: https://github.com/ricardolsmendes/datacatalog-custom-entries-manager/tree/master/sample-input/json
+[3]: https://github.com/ricardolsmendes/datacatalog-custom-model-manager
+[4]: https://github.com/ricardolsmendes/datacatalog-custom-entries-manager/workflows/Continuous%20Integration/badge.svg
+[5]: https://github.com/ricardolsmendes/datacatalog-custom-entries-manager/workflows/Continuous%20Delivery/badge.svg
+[6]: https://virtualenv.pypa.io/en/latest/
+[7]: https://github.com/ricardolsmendes/datacatalog-custom-entries-manager/tree/master/sample-input/csv
+[8]: https://docs.google.com/spreadsheets/d/1F_6M1BA9qlcGZf_ZyC3cUAePUjMXInZWbUOSGow5Gfc
+[9]: https://github.com/ricardolsmendes/datacatalog-custom-entries-manager/tree/master/sample-input/json
