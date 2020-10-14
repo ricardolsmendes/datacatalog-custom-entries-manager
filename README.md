@@ -1,9 +1,9 @@
 # datacatalog-custom-entries-manager
 
-Python package to manage Google Cloud [Data Catalog custom entries][1], loading metadata from
-external sources. Currently supports the CSV and JSON file formats.
+A Python package intended to manage Google Cloud [Data Catalog custom entries][1], loading metadata
+from external sources. Currently supports the CSV and JSON file formats.
 
-It's built on top of [GoogleCloudPlatform/datacatalog-connectors][2] and, differently from the
+It is built on top of [GoogleCloudPlatform/datacatalog-connectors][2] and, differently from the
 existing connectors, allows ingesting metadata with no need to connect to other systems than Data
 Catalog. Known use cases include validating Custom Entries ingestion workloads before coding their
 specific features and loading metadata into development / PoC environments.
