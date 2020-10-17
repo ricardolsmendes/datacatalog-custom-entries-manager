@@ -18,7 +18,7 @@ setuptools.setup(
     },
     include_package_data=True,
     install_requires=(
-        'google-datacatalog-connectors-commons==0.5.1',
+        'google-datacatalog-connectors-commons == 0.5.1',
         'pandas',
     ),
     setup_requires=('pytest-runner', ),
@@ -32,5 +32,6 @@ setuptools.setup(
         'Programming Language :: Python',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
     ],
 )
