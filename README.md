@@ -13,6 +13,13 @@ In case you need not only Entries but also Tags to validate your model/workload,
 
 ![Continuous Integration][4] ![Continuous Delivery][5]
 
+<!--
+  DO NOT UPDATE THE TABLE OF CONTENTS MANUALLY
+  run `npx markdown-toc -i README.md`.
+
+  Please stick to 120-character line wraps as much as you can.
+-->
+
 ## Table of Contents
 
 <!-- toc -->
@@ -35,6 +42,8 @@ In case you need not only Entries but also Tags to validate your model/workload,
     + [2.1.2. To a JSON file](#212-to-a-json-file)
 
 <!-- tocstop -->
+
+---
 
 ## 1. Environment setup
 
