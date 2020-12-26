@@ -2,7 +2,7 @@ import setuptools
 
 setuptools.setup(
     name='datacatalog-custom-entries-manager',
-    version='0.1.1',
+    version='0.1.2',
     url='https://github.com/ricardolsmendes/datacatalog-custom-entries-manager',
     author='Ricardo Mendes',
     author_email='ricardolsmendes@gmail.com',
