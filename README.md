@@ -11,13 +11,17 @@ specific features and loading metadata into development / PoC environments.
 In case you need not only Entries but also Tags to validate your model/workload, consider giving
 [datacatalog-custom-model-manager][3] a try.
 
-![Continuous Integration][4] ![Continuous Delivery][5]
+[![license](https://img.shields.io/github/license/ricardolsmendes/datacatalog-custom-entries-manager.svg)](https://github.com/ricardolsmendes/datacatalog-custom-entries-manager/blob/master/LICENSE)
+[![pypi](https://img.shields.io/pypi/v/datacatalog-custom-entries-manager.svg)](https://pypi.org/project/datacatalog-custom-entries-manager)
+[![issues](https://img.shields.io/github/issues/ricardolsmendes/datacatalog-custom-entries-manager.svg)](https://github.com/ricardolsmendes/datacatalog-custom-entries-manager/issues)
+[![continuous integration](https://github.com/ricardolsmendes/datacatalog-custom-entries-manager/actions/workflows/continuous-integration.yaml/badge.svg)](https://github.com/ricardolsmendes/datacatalog-custom-entries-manager/actions/workflows/continuous-integration.yaml)
+[![continuous delivery](https://github.com/ricardolsmendes/datacatalog-custom-entries-manager/actions/workflows/continuous-delivery.yaml/badge.svg)](https://github.com/ricardolsmendes/datacatalog-custom-entries-manager/actions/workflows/continuous-delivery.yaml)
 
 <!--
   DO NOT UPDATE THE TABLE OF CONTENTS MANUALLY
   run `npx markdown-toc -i README.md`.
 
-  Please stick to 120-character line wraps as much as you can.
+  Please stick to 100-character line wraps as much as you can.
 -->
 
 ## Table of Contents
@@ -49,7 +53,7 @@ In case you need not only Entries but also Tags to validate your model/workload,
 
 ### 1.1. Python + virtualenv
 
-Using [virtualenv][6] is optional, but strongly recommended unless you use [Docker](#12-docker).
+Using [virtualenv][4] is optional, but strongly recommended unless you use [Docker](#12-docker).
 
 #### 1.1.1. Install Python 3.6+
 
@@ -58,7 +62,7 @@ Using [virtualenv][6] is optional, but strongly recommended unless you use [Dock
 This is recommended so all related stuff will reside at the same place, making it easier to follow
 below instructions.
 
-```bash
+```sh
 mkdir ./datacatalog-custom-entries-manager
 cd ./datacatalog-custom-entries-manager
 ```
@@ -68,7 +72,7 @@ _All paths starting with `./` in the next steps are relative to the
 
 #### 1.1.3. Create and activate an isolated Python environment
 
-```bash
+```sh
 pip install --upgrade virtualenv
 python3 -m virtualenv --python python3 env
 source ./env/bin/activate
@@ -76,18 +80,18 @@ source ./env/bin/activate
 
 #### 1.1.4. Install the package
 
-```bash
+```sh
 pip install --upgrade datacatalog-custom-entries-manager
 ```
 
 ### 1.2. Docker
 
-Docker may be used as an alternative to run `datacatalog-custom-entries-manager`. In this case,
+_Docker_ may be used as an option to run `datacatalog-custom-entries-manager`. In this case,
 please disregard the [above](#11-python--virtualenv) _virtualenv_ setup instructions.
 
 #### 1.2.1. Get the source code
 
-```bash
+```sh
 git clone https://github.com/ricardolsmendes/datacatalog-custom-entries-manager
 cd ./datacatalog-custom-entries-manager
 ```
@@ -96,9 +100,9 @@ cd ./datacatalog-custom-entries-manager
 
 #### 1.3.1. Create a service account and grant it below roles
 
-- DataCatalog entryGroup Owner
-- DataCatalog entry Owner
-- Data Catalog Viewer
+- `DataCatalog entryGroup Owner`
+- `DataCatalog entry Owner`
+- `Data Catalog Viewer`
 
 #### 1.3.2. Download a JSON key and save it as
 
@@ -108,7 +112,7 @@ cd ./datacatalog-custom-entries-manager
 
 _This step can be skipped if you're using [Docker](#12-docker)._
 
-```bash
+```sh
 export GOOGLE_APPLICATION_CREDENTIALS=./credentials/datacatalog-custom-entries-manager.json
 ```
 
@@ -125,25 +129,25 @@ to describe all Data Catalog Entries you need.
 
 | Column                    | Description                                                                                                                                                                | Mandatory |
 | ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------: |
-| **user_specified_system** | Indicates the Entry source system                                                                                                                                          |    yes    |
-| **group_id**              | Id of the Entry Group the Entry belongs to                                                                                                                                 |    yes    |
-| **linked_resource**       | The resource a metadata Entry refers to                                                                                                                                    |    yes    |
-| **display_name**          | Display information such as title and description; a short name to identify the Entry (the `entry_id` field will be generated as a normalized version of the display name) |    yes    |
-| **description**           | Can consist of several sentences that describe the Entry contents                                                                                                          |    no     |
-| **user_specified_type**   | A custom value indicating the Entry type                                                                                                                                   |    yes    |
-| **created_at**            | The creation time of the underlying resource, not of the Data Catalog Entry (format: YYYY-MM-DDTHH:MM:SSZ)                                                                 |    no     |
-| **updated_at**            | The last-modified time of the underlying resource, not of the Data Catalog Entry (format: YYYY-MM-DDTHH:MM:SSZ)                                                            |    no     |
+| **user_specified_system** | Indicates the Entry source system                                                                                                                                          |  &check;  |
+| **group_id**              | Id of the Entry Group the Entry belongs to                                                                                                                                 |  &check;  |
+| **linked_resource**       | The resource a metadata Entry refers to                                                                                                                                    |  &check;  |
+| **display_name**          | Display information such as title and description; a short name to identify the Entry (the `entry_id` field will be generated as a normalized version of the display name) |  &check;  |
+| **description**           | Can consist of several sentences that describe the Entry contents                                                                                                          |  &cross;  |
+| **user_specified_type**   | A custom value indicating the Entry type                                                                                                                                   |  &check;  |
+| **created_at**            | The creation time of the underlying resource, not of the Data Catalog Entry (format: YYYY-MM-DDTHH:MM:SSZ)                                                                 |  &cross;  |
+| **updated_at**            | The last-modified time of the underlying resource, not of the Data Catalog Entry (format: YYYY-MM-DDTHH:MM:SSZ)                                                            |  &cross;  |
 
 - _SAMPLE INPUT_
 
-1. [sample-input/csv][7] for reference;
-1. [Data Catalog Sample Custom Entries][8] (Google Sheets) might help to create/export a CSV file.
+1. [sample-input/csv][5] for reference;
+1. [Data Catalog Sample Custom Entries][6] (Google Sheets) might help to create/export a CSV file.
 
 - _COMMANDS_
 
 **Python + virtualenv**
 
-```bash
+```sh
 datacatalog-custom-entries sync \
   --csv-file <CSV-FILE-PATH> \
   --project-id <YOUR-PROJECT-ID> --location-id <YOUR-LOCATION-ID>
@@ -151,7 +155,7 @@ datacatalog-custom-entries sync \
 
 **Docker**
 
-```bash
+```sh
 docker build --rm --tag datacatalog-custom-entries-manager .
 docker run --rm --tty \
   --volume <CREDENTIALS-FILE-FOLDER>:/credentials --volume <CSV-FILE-FOLDER>:/data \
@@ -194,13 +198,13 @@ needed to describe all Data Catalog Entries you need.
 
 - _SAMPLE INPUT_
 
-1. [sample-input/json][9] for reference;
+1. [sample-input/json][7] for reference;
 
 - _COMMANDS_
 
 **Python + virtualenv**
 
-```bash
+```sh
 datacatalog-custom-entries sync \
   --json-file <JSON-FILE-PATH> \
   --project-id <YOUR-PROJECT-ID> --location-id <YOUR-LOCATION-ID>
@@ -208,7 +212,7 @@ datacatalog-custom-entries sync \
 
 **Docker**
 
-```bash
+```sh
 docker build --rm --tag datacatalog-custom-entries-manager .
 docker run --rm --tty \
   --volume <CREDENTIALS-FILE-FOLDER>:/credentials --volume <CSV-FILE-FOLDER>:/data \
@@ -220,9 +224,7 @@ docker run --rm --tty \
 [1]: https://cloud.google.com/data-catalog/docs/how-to/custom-entries
 [2]: https://github.com/GoogleCloudPlatform/datacatalog-connectors
 [3]: https://github.com/ricardolsmendes/datacatalog-custom-model-manager
-[4]: https://github.com/ricardolsmendes/datacatalog-custom-entries-manager/workflows/Continuous%20Integration/badge.svg
-[5]: https://github.com/ricardolsmendes/datacatalog-custom-entries-manager/workflows/Continuous%20Delivery/badge.svg
-[6]: https://virtualenv.pypa.io/en/latest/
-[7]: https://github.com/ricardolsmendes/datacatalog-custom-entries-manager/tree/master/sample-input/csv
-[8]: https://docs.google.com/spreadsheets/d/1F_6M1BA9qlcGZf_ZyC3cUAePUjMXInZWbUOSGow5Gfc
-[9]: https://github.com/ricardolsmendes/datacatalog-custom-entries-manager/tree/master/sample-input/json
+[4]: https://virtualenv.pypa.io/en/latest/
+[5]: https://github.com/ricardolsmendes/datacatalog-custom-entries-manager/tree/master/sample-input/csv
+[6]: https://docs.google.com/spreadsheets/d/1F_6M1BA9qlcGZf_ZyC3cUAePUjMXInZWbUOSGow5Gfc
+[7]: https://github.com/ricardolsmendes/datacatalog-custom-entries-manager/tree/master/sample-input/json
