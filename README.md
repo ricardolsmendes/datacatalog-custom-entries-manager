@@ -44,6 +44,9 @@ In case you need not only Entries but also Tags to validate your model/workload,
   * [2.1. Synchronize](#21-synchronize)
     + [2.1.1. To a CSV file](#211-to-a-csv-file)
     + [2.1.2. To a JSON file](#212-to-a-json-file)
+- [3. How to contribute](#3-how-to-contribute)
+  * [3.1. Report issues](#31-report-issues)
+  * [3.2. Contribute code](#32-contribute-code)
 
 <!-- tocstop -->
 
@@ -60,7 +63,7 @@ Using [virtualenv][4] is optional, but strongly recommended unless you use [Dock
 #### 1.1.2. Create a folder
 
 This is recommended so all related stuff will reside at the same place, making it easier to follow
-below instructions.
+the next instructions.
 
 ```sh
 mkdir ./datacatalog-custom-entries-manager
@@ -158,7 +161,7 @@ datacatalog-custom-entries sync \
 ```sh
 docker build --rm --tag datacatalog-custom-entries-manager .
 docker run --rm --tty \
-  --volume <CREDENTIALS-FILE-FOLDER>:/credentials --volume <CSV-FILE-FOLDER>:/data \
+  --volume <CREDENTIALS-FILE-DIR>:/credentials --volume <CSV-FILE-DIR>:/data \
   datacatalog-custom-entries-manager sync \
   --csv-file /data/<CSV-FILE-PATH> \
   --project-id <YOUR-PROJECT-ID> --location-id <YOUR-LOCATION-ID>
@@ -215,11 +218,30 @@ datacatalog-custom-entries sync \
 ```sh
 docker build --rm --tag datacatalog-custom-entries-manager .
 docker run --rm --tty \
-  --volume <CREDENTIALS-FILE-FOLDER>:/credentials --volume <CSV-FILE-FOLDER>:/data \
+  --volume <CREDENTIALS-FILE-DIR>:/credentials --volume <CSV-FILE-DIR>:/data \
   datacatalog-custom-entries-manager sync \
   --json-file <JSON-FILE-PATH> \
   --project-id <YOUR-PROJECT-ID> --location-id <YOUR-LOCATION-ID>
 ```
+
+## 3. How to contribute
+
+Please make sure to take a moment and read the [Code of
+Conduct](https://github.com/ricardolsmendes/datacatalog-custom-entries-manager/blob/master/.github/CODE_OF_CONDUCT.md).
+
+### 3.1. Report issues
+
+Please report bugs and suggest features via the [GitHub
+Issues](https://github.com/ricardolsmendes/datacatalog-custom-entries-manager/issues).
+
+Before opening an issue, search the tracker for possible duplicates. If you find a duplicate, please
+add a comment saying that you encountered the problem as well.
+
+### 3.2. Contribute code
+
+Please make sure to read the [Contributing
+Guide](https://github.com/ricardolsmendes/datacatalog-custom-entries-manager/blob/master/.github/CONTRIBUTING.md)
+before making a pull request.
 
 [1]: https://cloud.google.com/data-catalog/docs/how-to/custom-entries
 [2]: https://github.com/GoogleCloudPlatform/datacatalog-connectors
